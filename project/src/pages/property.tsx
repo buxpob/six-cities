@@ -1,3 +1,5 @@
+import ReviewScreen from '../components/review/review';
+
 function PropertyScreen(): JSX.Element {
   return (
     <div className="page">
@@ -168,6 +170,7 @@ function PropertyScreen(): JSX.Element {
                     </div>
                   </li>
                 </ul>
+                <ReviewScreen />
               </section>
             </div>
           </div>

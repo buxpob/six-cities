@@ -6,14 +6,28 @@ import LoginScreen from '../../pages/login';
 import FavoritesScreen from '../../pages/favorites';
 import PropertyScreen from '../../pages/property';
 import PrivateRoute from '../private-route/private-route';
+import { Comments } from '../../types/types';
+import { Offers, Offer } from '../../types/types';
 
-function App(): JSX.Element {
+type AppProps = {
+  comments: Comments;
+  offers: Offers;
+}
+
+function App({ comments, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen cardsCount={5} />}
+          element={
+            <MainScreen
+              offers={offers}
+              onFocusCard={(offer: Offer) => {
+                console.log(`focus by ${offer.id}`);
+              }}
+            />
+          }
         />
         <Route
           path={AppRoute.Login}
@@ -23,7 +37,9 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesScreen />
+              <FavoritesScreen
+                offers={offers}
+              />
             </PrivateRoute>
           }
         />
@@ -41,3 +57,7 @@ function App(): JSX.Element {
 }
 
 export default App;
+
+// fetch('https://10.react.pages.academy/six-cities/hotels/2')
+//   .then((resolve) => resolve.json())
+//   .then((data) => console.log(data));
