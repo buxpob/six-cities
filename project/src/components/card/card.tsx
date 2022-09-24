@@ -1,18 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Offer } from '../../types/types';
 
 type CardScreenProp = {
-  numberCard: number;
+  offer: Offer;
+  onFocusCard: (offer: Offer) => void;
+  setCardId: (cardId: number) => void;
 }
 
-function CardScreen({ numberCard }: CardScreenProp): JSX.Element {
+export default function CardScreen(props: CardScreenProp): JSX.Element {
+  const { offer, onFocusCard, setCardId } = props;
+  const { id, previewImage } = offer;
+
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" key={id}
+      onMouseEnter={() => {
+        onFocusCard(offer);
+        setCardId(id);
+      }}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="/">
-          <img className="place-card__image" src={`img/apartment-0${numberCard}.jpg`} width={260} height={200} alt="Place" />
+          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place" />
         </a>
       </div>
       <div className="place-card__info">
@@ -35,7 +47,7 @@ function CardScreen({ numberCard }: CardScreenProp): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={`offer/${id}`}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
@@ -43,4 +55,3 @@ function CardScreen({ numberCard }: CardScreenProp): JSX.Element {
   );
 }
 
-export default CardScreen;
