@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 
-export default function ReviewScreen(): JSX.Element {
+export default function NewReviewScreen(): JSX.Element {
   const [formData, setFormData] = useState({
     rating: '',
     review: '',

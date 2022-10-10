@@ -2,23 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/types';
 
-type CardScreenProp = {
+type CardProps = {
   offer: Offer;
-  onFocusCard: (offer: Offer) => void;
-  setCardId: (cardId: number) => void;
+  onListItemHover: (id: number) => void;
 }
 
-export default function CardScreen(props: CardScreenProp): JSX.Element {
-  const { offer, onFocusCard, setCardId } = props;
+export default function Card(props: CardProps): JSX.Element {
+  const { offer, onListItemHover } = props;
   const { id, previewImage } = offer;
 
+  const listItemHoverHandler = () => {
+    onListItemHover(offer.id);
+  };
+
   return (
-    <article className="cities__card place-card" key={id}
-      onMouseEnter={() => {
-        onFocusCard(offer);
-        setCardId(id);
-      }}
-    >
+    <article className="cities__card place-card" key={id} onMouseEnter={listItemHoverHandler}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
