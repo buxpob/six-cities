@@ -6,15 +6,15 @@ import LoginScreen from '../../pages/login';
 import FavoritesScreen from '../../pages/favorites';
 import PropertyScreen from '../../pages/property';
 import PrivateRoute from '../private-route/private-route';
-import { Comments } from '../../types/types';
-import { Offers, Offer } from '../../types/types';
+import { Reviews } from '../../types/types';
+import { Offers } from '../../types/types';
 
 type AppProps = {
-  comments: Comments;
+  reviews: Reviews;
   offers: Offers;
 }
 
-function App({ comments, offers }: AppProps): JSX.Element {
+function App({ reviews, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,9 +23,6 @@ function App({ comments, offers }: AppProps): JSX.Element {
           element={
             <MainScreen
               offers={offers}
-              onFocusCard={(offer: Offer) => {
-                console.log(`focus by ${offer.id}`);
-              }}
             />
           }
         />

@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      comments={comments}
+      reviews={comments}
       offers={offers}
     />
   </React.StrictMode>,
